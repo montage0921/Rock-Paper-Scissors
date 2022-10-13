@@ -5,9 +5,11 @@ function getComputerChoice() {
   return rockPaperScissor[i];
 }
 
-const computerSelection = getComputerChoice();
+//Perform one single game
+function playRound() {
+  let playerSelection = prompt(`Enter rock, paper or scissor!`).toLowerCase();
+  const computerSelection = getComputerChoice();
 
-function playRound(playerSelection, computerSelection) {
   //guard clause
   if (
     playerSelection !== `rock` &&
@@ -16,9 +18,7 @@ function playRound(playerSelection, computerSelection) {
   )
     return;
 
-  console.log(playerSelection, computerSelection);
-
-  if (playerSelection === computerSelection) console.log(`Tie Game 🟰`);
+  if (playerSelection === computerSelection) return `Tie Game 🟰`;
   else if (playerSelection === `rock`) {
     return computerSelection === `paper`
       ? `You Lose! Paper beats Rock 🖐`
@@ -34,6 +34,30 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-const playerSelection = prompt(`Enter rock, paper or scissor!`).toLowerCase();
+//Perform user-defined times of game and determine the final winner!
+function game() {
+  //ask number of total rounds users want to play
+  const totalRound = +prompt(`How many times you wanna play?`);
 
-console.log(playRound(playerSelection, computerSelection));
+  let playerWin = 0;
+  let computerWin = 0;
+
+  for (let i = 1; i <= totalRound; i++) {
+    const result = playRound();
+
+    console.log(result);
+    if (result.indexOf(`Win`) > -1) playerWin++;
+    else if (result.indexOf(`Lose`) > -1) computerWin++;
+  }
+
+  console.log(
+    `You won ${playerWin} game! you lost ${computerWin} game! You tie ${
+      totalRound - playerWin - computerWin
+    } game!`
+  );
+  if (playerWin > computerWin) console.log(`Victory!!! 🏆`);
+  else if (playerWin < computerWin) console.log(`Defeat!!! 😢`);
+  else console.log(`Tie Game!`);
+}
+
+game();
