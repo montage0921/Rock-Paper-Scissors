@@ -35,31 +35,11 @@ function playRound(player, computer) {
   }
 }
 
-// function game() {
-//   let round = 0;
-
-//   while (playerWin < 5 && computerWin < 5) {
-//     const result = playRound();
-//     round++;
-//     console.log(result);
-//     if (result.indexOf(`Win`) > -1) playerWin++;
-//     else if (result.indexOf(`Lose`) > -1) computerWin++;
-//   }
-
-//   if (playerWin === 5) console.log(`Victory!!! 🏆`);
-//   else console.log(`Defeat!!! 😢`);
-
-//   console.log(round);
-// }
-
-//////////////////////////////////////////////
-//addEventListener
-
 let playerWin = 0,
   computerWin = 0,
   round = 0;
 
-btn.addEventListener(`click`, function (e) {
+function game1(e) {
   round++;
 
   const playerChoice = e.target.className;
@@ -77,7 +57,22 @@ btn.addEventListener(`click`, function (e) {
 
   if (+playerScore.textContent === 5) {
     result.textContent = `Victory!!! 🏆`;
+    btn.removeEventListener(`click`, game1);
   }
 
-  if (+computerScore.textContent === 5) result.textContent = `Defeat!!! 😩`;
-});
+  if (+computerScore.textContent === 5) {
+    result.textContent = `Defeat!!! 😩`;
+
+    btn.removeEventListener(`click`, game1);
+  }
+}
+
+function clear() {
+  (playerWin = 0), (computerWin = 0), (round = 0);
+  playerScore.textContent = 0;
+  computerScore.textContent = 0;
+}
+
+//////////////////////////////////////////////
+//addEventListener
+btn.addEventListener(`click`, game1);
