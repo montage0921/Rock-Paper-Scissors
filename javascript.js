@@ -36,28 +36,23 @@ function playRound() {
 
 //Perform user-defined times of game and determine the final winner!
 function game() {
-  //ask number of total rounds users want to play
-  const totalRound = +prompt(`How many times you wanna play?`);
+  let playerWin = 0,
+    computerWin = 0;
 
-  let playerWin = 0;
-  let computerWin = 0;
+  let round = 0;
 
-  for (let i = 1; i <= totalRound; i++) {
+  while (playerWin < 5 && computerWin < 5) {
     const result = playRound();
-
+    round++;
     console.log(result);
     if (result.indexOf(`Win`) > -1) playerWin++;
     else if (result.indexOf(`Lose`) > -1) computerWin++;
   }
 
-  console.log(
-    `You won ${playerWin} game! you lost ${computerWin} game! You tie ${
-      totalRound - playerWin - computerWin
-    } game!`
-  );
-  if (playerWin > computerWin) console.log(`Victory!!! 🏆`);
-  else if (playerWin < computerWin) console.log(`Defeat!!! 😢`);
-  else console.log(`Tie Game!`);
+  if (playerWin === 5) console.log(`Victory!!! 🏆`);
+  else console.log(`Defeat!!! 😢`);
+
+  console.log(round);
 }
 
 game();
