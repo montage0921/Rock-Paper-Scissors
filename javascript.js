@@ -7,7 +7,7 @@ function getComputerChoice() {
 
 //Perform one single game
 function playRound() {
-  let playerSelection = prompt(`Enter rock, paper or scissor!`).toLowerCase();
+  // let playerSelection = prompt(`Enter rock, paper or scissor!`).toLowerCase();
   const computerSelection = getComputerChoice();
 
   //guard clause

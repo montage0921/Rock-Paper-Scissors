@@ -1,0 +1,66 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+  font-family: Comic Sans MS;
+}
+
+#background {
+  background-image: url(/images/background.jpg);
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.banner {
+  font-size: 80px;
+  color: #704923;
+}
+
+.resultPanel .result {
+  font-size: 50px;
+}
+
+.gameboard {
+  display: flex;
+  width: 90%;
+  justify-content: space-around;
+  gap: 30px;
+}
+
+.playerSection,
+.computerSection {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-weight: bold;
+  color: red;
+  font-size: 30px;
+  gap: 20px;
+}
+
+.playerBtn,
+.computerBtn {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  cursor: pointer;
+  height: 150px;
+  width: 150px;
+  font-size: 100px;
+  outline: none;
+  background-color: #bbd979;
+  border-radius: 20px;
+}
+
+.hidden {
+}

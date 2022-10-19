@@ -6,8 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
     <title>Rock-Paper-Scissor</title>
+    <script defer src="javascript.js"></script>
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+      }
+
+      #background {
+        background-image: url(/images/background.jpg);
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    </style>
   </head>
   <body>
-    <script src="javascript.js"></script>
+    <div id="background">
+      <div class="banner">Rock-Paper-Scissor</div>
+
+      <div class="resultPanel">
+        <div class="result"></div>
+      </div>
+
+      <div class="gameboard">
+        <div class="playerSection">
+          <div class="playerScore">
+            Score
+            <span></span>
+          </div>
+
+          <div class="playerBtn">
+            <button class="rock">✊</button>
+            <button class="paper">🖐</button>
+            <button class="scissor">✌️</button>
+          </div>
+        </div>
+
+        <div class="computerSection">
+          <div class="computerScore">
+            Score
+            <span> </span>
+          </div>
+
+          <div class="computerBtn">
+            <button class="rock">✊</button>
+            <button class="paper">🖐</button>
+            <button class="scissor">✌️</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
+
+<!-- 
+        
+     -->
