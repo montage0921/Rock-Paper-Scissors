@@ -1,4 +1,5 @@
 //querySelector
+const body = document.querySelector(`body`);
 const btn = document.querySelector(`.playerBtn`);
 const result = document.querySelector(`.result`);
 const playerScore = document.querySelector(`.playerScore span`);
@@ -60,15 +61,33 @@ function game1(e) {
   computerScore.textContent = computerWin;
 
   if (+playerScore.textContent === 5) {
-    result.textContent = `Victory!!! 🏆`;
+    const popupWindow = `  <div class="popup">
+    <div class="overlay"></div>
+    <div class="content">
+      <h1>Victory!!!!🏆</h1>
+      <button class="playagain">Play Again!</button>
+    </div>
+  </div>`;
+
+    body.insertAdjacentHTML(`beforeend`, popupWindow);
+
     winSound.play();
-    btn.removeEventListener(`click`, game1);
   }
 
   if (+computerScore.textContent === 5) {
-    result.textContent = `Defeat!!! 😩`;
     loseSound.play();
-    btn.removeEventListener(`click`, game1);
+
+    const popupWindow = `  <div class="popup">
+    <div class="overlay"></div>
+    <div class="content">
+      <h1>Defeat!!!!💩</h1>
+      <button class="playagain">Play Again!</button>
+    </div>
+  </div>`;
+
+    body.insertAdjacentHTML(`beforeend`, popupWindow);
+
+    loseSound.play();
   }
 }
 
