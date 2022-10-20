@@ -1,6 +1,6 @@
-//querySelector
+////////////querySelector////////////////
 const body = document.querySelector(`body`);
-const btn = document.querySelector(`.playerBtn`);
+const btnPlayer = document.querySelector(`.playerBtn`);
 const result = document.querySelector(`.result`);
 const playerScore = document.querySelector(`.playerScore span`);
 const computerScore = document.querySelector(`.computerScore span`);
@@ -9,9 +9,10 @@ const loseSound = document.querySelector(`#lose`);
 const playAgainBtn = document.querySelector(`.playagain`);
 let popup = ``;
 
-/////////////////////////////////////////
+///////Game Logic(Functions) /////////////
 
-//Game Logic
+//Function: allow computer get game choices.
+//return: a string (`rock`,`paper` or `scissor`)
 const rockPaperScissor = [`rock`, `paper`, `scissor`];
 
 function getComputerChoice() {
@@ -19,11 +20,10 @@ function getComputerChoice() {
   return rockPaperScissor[i];
 }
 
-//Perform one single game
+//Function: Perform one single game
+//Arguments:  two strings (`rock`,`paper` or `scissor`)
+//return: result sentences
 function playRound(player, computer) {
-  //guard clause
-  if (player !== `rock` && player !== `paper` && player !== `scissor`) return;
-
   if (player === computer) return `Tie Game 🟰`;
   else if (player === `rock`) {
     return computer === `paper`
@@ -40,82 +40,82 @@ function playRound(player, computer) {
   }
 }
 
-let playerWin = 0,
-  computerWin = 0,
-  round = 0;
+//Function: show results and "play again" button on a popup window
+//Arguments: true or false
+function showPopup(isPlayerWin) {
+  const victoryOrDefeat =
+    isPlayerWin === true ? `Victory🏆🏆🏆` : `Defeat💩💩💩`;
+  const wonOrLost = isPlayerWin === true ? `won` : `lost`;
+  isPlayerWin === true ? winSound.play() : loseSound.play();
 
-function game1(e) {
-  round++;
-
-  const playerChoice = e.target.className;
-  const computerChoice = getComputerChoice();
-
-  const computerBtn = document.querySelector(`.computerBtn .${computerChoice}`);
-
-  const game = playRound(playerChoice, computerChoice);
-
-  result.textContent = game;
-
-  if (game.indexOf(`Win`) > -1) playerWin++;
-  else if (game.indexOf(`Lose`) > -1) computerWin++;
-
-  playerScore.textContent = playerWin;
-  computerScore.textContent = computerWin;
-
-  if (+playerScore.textContent === 5) {
-    let popupHTML = `   <div class="popup">
+  const popupHTML = `   <div class="popup">
     <div class="overlay"></div>
     <div class="content">
-      <h1 style="margin: 0px">Victory🏆🏆🏆</h1>
-      <h2 style="margin: 0px">You won after ${round} rounds</h2>
+      <h1 style="margin: 0px">${victoryOrDefeat}</h1>
+      <h2 style="margin: 0px">You ${wonOrLost} after ${round} rounds</h2>
       <button class="playagain">Play Again!</button>
     </div>
   </div>`;
 
-    body.insertAdjacentHTML(`beforeend`, popupHTML);
-
-    winSound.play();
-
-    const playAgainBtn = document.querySelector(`.playagain`);
-    popup = document.querySelector(`.popup`);
-
-    playAgainBtn.addEventListener(`click`, clear);
-  }
-
-  if (+computerScore.textContent === 5) {
-    loseSound.play();
-
-    let popupHTML = `  <div class="popup">
-    <div class="overlay"></div>
-    <div class="content">
-      <h1 style="margin: 0px">Defeat💩💩💩</h1>
-      <h2 style="margin: 0px">You lost after ${round} rounds</h2>
-      <button class="playagain">Play Again!</button>
-    </div>
-  </div>`;
-
-    body.insertAdjacentHTML(`beforeend`, popupHTML);
-
-    loseSound.play();
-
-    const playAgainBtn = document.querySelector(`.playagain`);
-
-    popup = document.querySelector(`.popup`);
-
-    playAgainBtn.addEventListener(`click`, clear);
-  }
+  body.insertAdjacentHTML(`beforeend`, popupHTML);
 }
 
+//Function: event listener when click "play again" button
 function clear(e) {
   body.removeChild(popup);
-  playerWin = 0;
-  computerWin = 0;
+  winCounter = 0;
+  loseCounter = 0;
   result.textContent = ``;
   round = 0;
   playerScore.textContent = 0;
   computerScore.textContent = 0;
 }
 
+//Function for refactoring playagain process
+function playAgain() {
+  const playAgainBtn = document.querySelector(`.playagain`);
+  popup = document.querySelector(`.popup`);
+  playAgainBtn.addEventListener(`click`, clear);
+}
+
+//Variables: count win, lose and total round played
+let winCounter = 0,
+  loseCounter = 0,
+  round = 0;
+
+//Function: eventListener when click buttons on game board.
+function game1(e) {
+  round++;
+
+  const playerChoice = e.target.className;
+  const computerChoice = getComputerChoice();
+
+  const game = playRound(playerChoice, computerChoice);
+
+  //show result on web
+  result.textContent = game;
+
+  //Logic for counting win or lose times and show them on web
+  if (game.indexOf(`Win`) > -1) winCounter++;
+  else if (game.indexOf(`Lose`) > -1) loseCounter++;
+
+  playerScore.textContent = winCounter;
+  computerScore.textContent = loseCounter;
+
+  //Logic for showing final results (final winner is whoever reaches 5 firstly)
+  const scoreForWin = 5;
+
+  if (+playerScore.textContent === scoreForWin) {
+    showPopup(true);
+    playAgain();
+  }
+
+  if (+computerScore.textContent === scoreForWin) {
+    showPopup(false);
+    playAgain();
+  }
+}
+
 //////////////////////////////////////////////
-//addEventListener
-btn.addEventListener(`click`, game1);
+////////////////addEventListener//////////////
+btnPlayer.addEventListener(`click`, game1);
