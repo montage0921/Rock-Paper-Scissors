@@ -46,6 +46,7 @@ function showPopup(isPlayerWin) {
   const victoryOrDefeat =
     isPlayerWin === true ? `Victory🏆🏆🏆` : `Defeat💩💩💩`;
   const wonOrLost = isPlayerWin === true ? `won` : `lost`;
+
   isPlayerWin === true ? winSound.play() : loseSound.play();
 
   const popupHTML = `   <div class="popup">
