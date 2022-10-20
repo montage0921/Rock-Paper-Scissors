@@ -3,6 +3,8 @@ const btn = document.querySelector(`.playerBtn`);
 const result = document.querySelector(`.result`);
 const playerScore = document.querySelector(`.playerScore span`);
 const computerScore = document.querySelector(`.computerScore span`);
+const winSound = document.querySelector("#win");
+const loseSound = document.querySelector(`#lose`);
 
 /////////////////////////////////////////
 
@@ -57,12 +59,13 @@ function game1(e) {
 
   if (+playerScore.textContent === 5) {
     result.textContent = `Victory!!! 🏆`;
+    winSound.play();
     btn.removeEventListener(`click`, game1);
   }
 
   if (+computerScore.textContent === 5) {
     result.textContent = `Defeat!!! 😩`;
-
+    loseSound.play();
     btn.removeEventListener(`click`, game1);
   }
 }
