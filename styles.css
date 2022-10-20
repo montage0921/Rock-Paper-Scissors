@@ -41,15 +41,15 @@ html {
   flex-direction: column;
   text-align: center;
   font-weight: bold;
-  color: red;
-  font-size: 30px;
+  color: rgb(5, 107, 102);
+  font-size: 40px;
   gap: 20px;
 }
 
 .playerBtn,
 .computerBtn {
   display: flex;
-  gap: 10px;
+  gap: 30px;
 }
 
 button {
@@ -60,7 +60,26 @@ button {
   outline: none;
   background-color: #bbd979;
   border-radius: 20px;
+  transition: all 0.25s ease;
 }
 
-.hidden {
+.playerBtn button:hover {
+  transform: scale(1.1);
+  border-color: #ffc600;
+  background-color: #96b05d;
+  box-shadow: 0 0 1rem #ffc600;
+}
+
+.playerBtn button:focus {
+  transform: scale(1.1);
+  border-color: #ffc600;
+  background-color: #96b05d;
+  box-shadow: 0 0 1rem #ffc600;
+}
+
+.active {
+  transform: scale(1.1);
+  border-color: #ffc600;
+  background-color: #96b05d;
+  box-shadow: 0 0 1rem #ffc600;
 }

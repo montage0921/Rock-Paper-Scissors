@@ -47,12 +47,14 @@ function game1(e) {
   const playerChoice = e.target.className;
   const computerChoice = getComputerChoice();
 
+  const computerBtn = document.querySelector(`.computerBtn .${computerChoice}`);
+
   const game = playRound(playerChoice, computerChoice);
+
   result.textContent = game;
 
   if (game.indexOf(`Win`) > -1) playerWin++;
   else if (game.indexOf(`Lose`) > -1) computerWin++;
-  console.log(playerWin);
 
   playerScore.textContent = playerWin;
   computerScore.textContent = computerWin;
