@@ -6,6 +6,8 @@ const playerScore = document.querySelector(`.playerScore span`);
 const computerScore = document.querySelector(`.computerScore span`);
 const winSound = document.querySelector("#win");
 const loseSound = document.querySelector(`#lose`);
+const playAgainBtn = document.querySelector(`.playagain`);
+let popup = ``;
 
 /////////////////////////////////////////
 
@@ -61,38 +63,55 @@ function game1(e) {
   computerScore.textContent = computerWin;
 
   if (+playerScore.textContent === 5) {
-    const popupWindow = `  <div class="popup">
+    let popupHTML = `   <div class="popup">
     <div class="overlay"></div>
     <div class="content">
-      <h1>Victory!!!!🏆</h1>
+      <h1 style="margin: 0px">Victory🏆🏆🏆</h1>
+      <h2 style="margin: 0px">You won after ${round} rounds</h2>
       <button class="playagain">Play Again!</button>
     </div>
   </div>`;
 
-    body.insertAdjacentHTML(`beforeend`, popupWindow);
+    body.insertAdjacentHTML(`beforeend`, popupHTML);
 
     winSound.play();
+
+    const playAgainBtn = document.querySelector(`.playagain`);
+    popup = document.querySelector(`.popup`);
+
+    playAgainBtn.addEventListener(`click`, clear);
   }
 
   if (+computerScore.textContent === 5) {
     loseSound.play();
 
-    const popupWindow = `  <div class="popup">
+    let popupHTML = `  <div class="popup">
     <div class="overlay"></div>
     <div class="content">
-      <h1>Defeat!!!!💩</h1>
+      <h1 style="margin: 0px">Defeat💩💩💩</h1>
+      <h2 style="margin: 0px">You lost after ${round} rounds</h2>
       <button class="playagain">Play Again!</button>
     </div>
   </div>`;
 
-    body.insertAdjacentHTML(`beforeend`, popupWindow);
+    body.insertAdjacentHTML(`beforeend`, popupHTML);
 
     loseSound.play();
+
+    const playAgainBtn = document.querySelector(`.playagain`);
+
+    popup = document.querySelector(`.popup`);
+
+    playAgainBtn.addEventListener(`click`, clear);
   }
 }
 
-function clear() {
-  (playerWin = 0), (computerWin = 0), (round = 0);
+function clear(e) {
+  body.removeChild(popup);
+  playerWin = 0;
+  computerWin = 0;
+  result.textContent = ``;
+  round = 0;
   playerScore.textContent = 0;
   computerScore.textContent = 0;
 }

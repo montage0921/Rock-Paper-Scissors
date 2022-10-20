@@ -106,12 +106,13 @@ html {
   text-align: center;
   padding: 45px, 0;
   box-sizing: border-box;
+  background-color: #bbd979;
   border-radius: 20px;
-  background-color: #a2eab4;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 15px;
 }
 
 .playagain {
