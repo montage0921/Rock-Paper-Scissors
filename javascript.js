@@ -78,6 +78,15 @@ function playAgain() {
   playAgainBtn.addEventListener(`click`, clear);
 }
 
+function computerBtnAnimation(computerChoice) {
+  const computerDOM = document.querySelectorAll(`.pc`);
+  computerDOM.forEach((ele) => {
+    if (ele.className.indexOf(`${computerChoice}`) > -1) {
+      ele.style.backgroundColor = `#fc5868`;
+    } else ele.style.backgroundColor = `#bbd979`;
+  });
+}
+
 //Variables: count win, lose and total round played
 let winCounter = 0,
   loseCounter = 0,
@@ -85,10 +94,16 @@ let winCounter = 0,
 
 //Function: eventListener when click buttons on game board.
 function game1(e) {
+  //guard clause
+  if (e.target.className === `playerBtn`) return;
+
   round++;
 
   const playerChoice = e.target.className;
   const computerChoice = getComputerChoice();
+
+  //computer's button effects
+  computerBtnAnimation(computerChoice);
 
   const game = playRound(playerChoice, computerChoice);
 
